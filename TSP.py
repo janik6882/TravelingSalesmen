@@ -1,6 +1,7 @@
 import itertools
 import csv
 import datetime
+import os
 __author__ = "Janik Klauenberg"
 __version__ = 2.5
 #Dieses Projekt wird auf Github demnaechst auf englisch verfuegbar sein, allerdings mit minimalen
@@ -109,6 +110,7 @@ class SpeditionsProblem():
             for k in self.alle_moeglichen[i][1]:
                 res[i].append(k)
         filename = filename + ".csv"
+        filename = os.path.join("csv", filename)
         first_row = ["Distanz", "Pfad"]
         print (res)
         global x
