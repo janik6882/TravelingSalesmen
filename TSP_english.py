@@ -13,7 +13,7 @@ py_ver = float(str(x[0]) + "." + str(x[1]))
 if min_py_ver>py_ver:
     sys.exit()
 
-class SpeditionsProblem():
+class TSP():
     def __init__(self, dists, startingpoint):
         """
         Comment: Class for solving the Traveling Salesmen Problem
@@ -143,7 +143,7 @@ if __name__ == '__main__':
                 4 : {0 : 10, 1 : 4, 2 : 10, 3 : 5}
     }
 
-    test = SpeditionsProblem(distances, 0)
+    test = TSP(distances, 0)
     print ("Bester Weg:")
     print (test.get_solution())
     print ("\nAlle Wege:")
