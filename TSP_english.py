@@ -5,7 +5,7 @@ import os
 __author__ = "Janik Klauenberg"
 __version__ = 2.5
 #Dieses Projekt wird auf Github demnaechst auf englisch verfuegbar sein, allerdings mit minimalen
-min_py_ver = 2.6
+min_py_ver = 2.65
 #__github__ = "https://github.com/janik6882/TravelingSalesmen" Currently Private
 import sys
 x = sys.version_info
@@ -28,10 +28,10 @@ class SpeditionsProblem():
 
     def get_all_paths(self):
         """
-        Kommentar: Erzeugt alle moeglichen pathe fuer die Instanz
-        Input: Name der Instanz
-        Output: Keins, erzeugt oder aendert lokale Variable alle_moeglichen
-        Besonders: Keine Besonderheiten
+        Comment: creates all possible paths for an instance
+        Input: Name of the instance
+        Output: Nothing, creates or changes local variable all_possible
+        Special: Nothing special
         """
         main_path = []
         for i in self.distances:
@@ -45,10 +45,10 @@ class SpeditionsProblem():
         self.all_possible = all
     def get_distances(self, path):
         """
-        Kommentar: Sucht fuer einen path die gesamtdistanz und gibt diese mittels return konstruktor zurueck
-        Input: Name der Instanz, path von welchem die Distanz benoetigt wird
-        Output: Distanz eines pathes mittels Return konstruktor
-        Besonders: Es muessen Verbindungen von ALLEN knoten untereinander existieren
+        Comment: Searchen total distance for a path and returns it with the return constructor
+        Input: Name of the Instance and path from which the distance is needed
+        Output: Distance of the path with return constructor
+        Special: Ther HAVE TO BE connections from every node to every other node, otherwise the program wont work
         """
         res = 0
         for i in range(len(path)-1):
@@ -59,10 +59,10 @@ class SpeditionsProblem():
         return res
     def get_all_distances(self):
         """
-        Kommentar: Nutzt get_distanz() um die distanz von allen moeglichen Wegen zu ermitteln
-        Input: Name der Instanz
-        Output: Kein direktes, aendert lokale variable alle_moeglichen
-        Besonders: Kein direktes Return oder so, prueft ob problem bereits geloest wurde
+        Comment: Uses get_distances() to calculate the distances from all possible paths
+        Input: name of the instance
+        Output: NO direkt output, changes local variable all_possible
+        Special: No return or similar, checks if problem already got solved
         """
         if self.solved:
             return
@@ -74,10 +74,10 @@ class SpeditionsProblem():
         self.all_possible = temp
     def solve_problem(self):
         """
-        Kommentar: loest das Problem indem es die Methode get_all_distances aufruft
-        Input: Name der Instanz
-        Output: Kein direktes, lokale variable alle_moeglichen wird veraendert
-        Besonders: prueft ob problem bereits geloest wurde
+        Comment: Solves th Traveling Salesmen Problem by using the function get_all_distances
+        Input: Name of the instance
+        Output: Nothing directly, changes local variable all_possible
+        Special: checks if problem was already solved
         """
         if not self.solved:
             self.get_all_distances()
@@ -86,13 +86,16 @@ class SpeditionsProblem():
             pass
     def get_solution(self):
         """
-        Kommentar: Fuehrt Methode get_all_distances aus und gibt schnellsten weg aus
-        Input: Name der Instanz
-        Output: Kein direktes
-        Besonders: prueft ob problem bereits geloest wurde
+        Comment: Executes function get_all_distances after checking if problem was solved or not and return fastest solution for the problem
+        Input: name of the instance
+        Output: fastest solution for the TSP
+        Special: Checks if problem was solved and if path is shorter than near infinity (means path is impossible)
         """
         self.solve_problem()
-        return self.all_possible[0]
+        if self.all_possible[0][0]>hash(float("inf")):
+            return None
+        else:
+            return self.all_possible[0]
     def export_loesung(self, filename=None):
         """
         Kommentar: Exportiert die Loesung sowie alle anderen moeglichen pathe mit gewicht
@@ -133,7 +136,7 @@ if __name__ == '__main__':
     Output: Ausgabe des ergebnisses mittels Print
     Besonders: nichts Besonders, da Main funktion
     """
-    distanzen ={
+    distances ={
                 0 : {1 : 15, 2 : 25, 3 : 25, 4 : 10},
                 1 : {0 : 15, 2 : 6, 3 : 10, 4 : 4},
                 2 : {0 : 25, 1 : 6, 3 : 7, 4 : 10},
@@ -141,7 +144,7 @@ if __name__ == '__main__':
                 4 : {0 : 10, 1 : 4, 2 : 10, 3 : 5}
     }
 
-    erster = SpeditionsProblem(distanzen, 0)
+    erster = SpeditionsProblem(distances, 0)
     print ("Bester Weg:")
     print (erster.get_solution())
     print ("\nAlle Wege:")
