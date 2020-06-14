@@ -96,12 +96,12 @@ class SpeditionsProblem():
             return None
         else:
             return self.all_possible[0]
-    def export_loesung(self, filename=None):
+    def export_solution(self, filename=None):
         """
-        Kommentar: Exportiert die Loesung sowie alle anderen moeglichen pathe mit gewicht
-        Input: name der Instanz, optional: Name der Datei
-        Output: Kein direktes Output
-        Besonders: Optimiert fuer python 3 und python 3
+        Comment: Exports solutio and also all possible paths with their corresponding distance
+        Input: Name of the instance, optional: filename, gets automaticaly generated with current date if not given
+        Output: No direct output, only export of csv file
+        Special: Optimized for both, python 2 and python 3
         """
         res = []
         if not self.solved:
@@ -121,20 +121,19 @@ class SpeditionsProblem():
             f = open(filename, "w", newline="")
         elif x[0]==2:
             f = open(filename, "wb")
-        #with open(filename, "wb") as f:
         writer = csv.writer(f)
         writer.writerow(first_row)
-        for loesung in res:
-            writer.writerow(loesung)
+        for solutions in res:
+            writer.writerow(solutions)
         f.close()
 
 
 if __name__ == '__main__':
     """
-    Kommentar: Main Programm, erstellt Instanz "erster" und uebergibt einen ungerichteten Graphen
-    Input: Keins, da Main
-    Output: Ausgabe des ergebnisses mittels Print
-    Besonders: nichts Besonders, da Main funktion
+    Comment: Standard main testing routine
+    Input: Nothing, ist a main function
+    Output: Only via Print
+    Special: Nothing special, just a main function
     """
     distances ={
                 0 : {1 : 15, 2 : 25, 3 : 25, 4 : 10},
@@ -144,9 +143,9 @@ if __name__ == '__main__':
                 4 : {0 : 10, 1 : 4, 2 : 10, 3 : 5}
     }
 
-    erster = SpeditionsProblem(distances, 0)
+    test = SpeditionsProblem(distances, 0)
     print ("Bester Weg:")
-    print (erster.get_solution())
+    print (test.get_solution())
     print ("\nAlle Wege:")
-    print (erster.all_possible)
-    #print (erster.export_loesung())
+    print (test.all_possible)
+    print (test.export_solution())
