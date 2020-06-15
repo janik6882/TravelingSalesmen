@@ -6,7 +6,7 @@ __author__ = "Janik Klauenberg"
 __version__ = 2.5
 #Dieses Projekt wird auf Github demnaechst auf englisch verfuegbar sein, allerdings mit minimalen
 min_py_ver = 2.6
-#__github__ = "https://github.com/janik6882/TravelingSalesmen" Currently Private
+__github__ = "https://github.com/janik6882/TravelingSalesmen"
 import sys
 x = sys.version_info
 py_ver = float(str(x[0]) + "." + str(x[1]))
